@@ -1,0 +1,27 @@
+---
+- name: Clear variables
+  set_fact:
+    module_list: []
+
+- name: Build module list
+  set_fact:
+    module_list: "{{ module_list + [item.name] }}"
+  loop: "{{ beat_config[beat_name].modules }}"
+
+- name: Gather enabled modules
+  shell: "{{ beat_name }} modules list | awk '!NF{f=0} /Enabled/ {f=1} f' | grep -v 'Enabled:'"
+  register: "enabled_modules"
+  ignore_errors: yes
+
+- name: Install and configure module
+  include: module_install_and_configure.yml
+  loop: "{{ beat_config[beat_name].modules }}"
+  loop_control:
+    loop_var: beat_module_info
+
+- name: Disable unneeded modules for beat {{ beat_name }}
+  shell: "{{ beat_name }} modules disable {{ module_name }}"
+  loop: "{{ enabled_modules.stdout_lines | difference(module_list) }}"
+  loop_control:
+    loop_var: "module_name"
+  notify: "restart {{ beat_name }}"

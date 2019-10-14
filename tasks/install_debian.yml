@@ -1,0 +1,14 @@
+---
+- name: Add repo key
+  apt_key:
+    url: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+    state: present
+- name: Add repo
+  apt_repository:
+    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
+    state: present
+- name: Install package
+  apt:
+    name: "{{ package_and_service_name[beat_name] }}={{ beat_version }}"
+    update_cache: yes
+    state: present

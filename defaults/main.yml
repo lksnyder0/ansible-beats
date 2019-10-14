@@ -1,0 +1,6 @@
+---
+beat_version: 7.4.0
+beat_user: "root"
+beat_group: "root"
+beat_config_mode: "0600"
+beat_inventory_file: "/var/log/installed_beats.txt"

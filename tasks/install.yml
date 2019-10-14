@@ -1,0 +1,12 @@
+---
+# Hack to fix execution with tags, list tags that depend on 
+- name: "Gathering Install Facts"
+  setup:
+  tags: ["never", "install"]
+  when: ansible_facts == {}
+- name: Install on Debian
+  include: install_debian.yml
+  when: "ansible_os_family == 'Debian'"
+- name: Install on RedHat
+  include: install_redhat.yml
+  when: "ansible_os_family == 'RedHat'"

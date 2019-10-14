@@ -1,0 +1,25 @@
+---
+- name: restart auditbeat
+  systemd:
+    name: auditbeat
+    state: restarted
+- name: restart filebeat
+  systemd:
+    name: filebeat
+    state: restarted
+- name: restart packetbeat
+  systemd:
+    name: packetbeat
+    state: restarted
+- name: restart metricbeat
+  systemd:
+    name: metricbeat
+    state: restarted
+- name: restart heartbeat
+  systemd:
+    name: heartbeat-elastic
+    state: restarted
+- name: restart journalbeat
+  systemd:
+    name: journalbeat
+    state: restarted

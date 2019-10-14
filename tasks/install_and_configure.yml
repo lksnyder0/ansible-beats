@@ -1,0 +1,26 @@
+---
+- name: "Install {{ beat_name }}"
+  include: install.yml
+  become: yes
+  tags: [ "install" ]
+
+- name: "Copy config files"
+  include: config.yml
+  become: yes
+  tags: [ "config" ]
+
+- name: "Manage modules"
+  include: modules.yml
+  tags: [ "modules" ]
+  when: beat_config[beat_name].modules is defined
+
+- name: Start and Enable {{ beat_name }}
+  become: yes
+  systemd:
+    name: "{{ package_and_service_name[beat_name] }}"
+    enabled: true
+    state: started
+
+- name: Add to list of installed beats
+  set_fact:
+    installed_beats: "{{ installed_beats + [ beat_name ] }}"

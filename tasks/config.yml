@@ -1,0 +1,19 @@
+---
+- name: "Copy default config file for {{ beat_name }}"
+  copy:
+    src: "{{ beat_name }}.yml"
+    dest: "/etc/{{ beat_name }}/{{ beat_name }}.yml"
+    owner: "{{ beat_user }}"
+    group: "{{ beat_group }}"
+    mode: "0644"
+  notify: "restart {{ beat_name }}"
+  when: "beat_config[beat_name].config is undefined"
+- name: "Copy custom config file for {{ beat_name }}"
+  copy:
+    src: "{{ beat_config[beat_name].config }}"
+    dest: "/etc/{{ beat_name }}/{{ beat_name }}.yml"
+    owner: "{{ beat_user }}"
+    group: "{{ beat_group }}"
+    mode: "0644"
+  notify: "restart {{ beat_name }}"
+  when: beat_config[beat_name].config is defined

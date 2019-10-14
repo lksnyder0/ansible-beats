@@ -1,0 +1,29 @@
+---
+- name: "Gather Facts"
+  setup:
+  tags: ["always"]
+  when: ansible_facts == {}
+- name: Install and Configure Beat
+  include: install_and_configure.yml
+  become: yes
+  loop:  "{{ beats }}"
+  loop_control:
+    loop_var: "beat_name"
+- name: Ensure inventory file exists
+  file:
+    path: "{{ beat_inventory_file }}"
+    state: touch
+- name: Determine previously installed beats
+  shell: "cat {{ beat_inventory_file }}"
+  register: previously_installed_beats
+- name: Purge unneeded beats
+  include: uninstall.yml
+  loop:  "{{ previously_installed_beats.stdout_lines | difference(installed_beats) }}"
+  tags: [uninstall", "install"]
+- name: Write list of installed beats
+  template:
+    dest: "{{ beat_inventory_file }}"
+    src: installed_beats.txt.j2
+    force: yes 
+    owner: "{{ beat_user }}" # not required. Name of the user that should own the file/directory, as would be fed to I(chown).
+    group: "{{ beat_group }}"

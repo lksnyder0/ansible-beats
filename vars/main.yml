@@ -1,0 +1,10 @@
+---
+# vars file for ragriz.beat
+installed_beats: []
+package_and_service_name:
+  heartbeat: "heartbeat-elastic"
+  metricbeat: "metricbeat"
+  filebeat: "filebeat"
+  packetbeat: "packetbeat"
+  journalbeat: "journalbeat"
+  auditbeat: "auditbeat"

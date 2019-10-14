@@ -1,0 +1,13 @@
+---
+- name: Add repository
+  yum_repository:
+    name: Elastic-6.x
+    description: "Elastic repository for 7.x packages"
+    baseurl: "https://artifacts.elastic.co/packages/7.x/yum"
+    gpgkey: "https://packages.elastic.co/GPG-KEY-elasticsearch"
+    gpgcheck: yes
+    file: elastic-7.x
+- name: Install package
+  yum:
+    name: "{{ package_and_service_name[beat_name] }}-{{ beat_version }}"
+    state: present
