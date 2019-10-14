@@ -41,7 +41,7 @@ It is possible to configure the role in the playbook.
   become: yes
   roles:
   - { 
-    role: ragriz.beat,
+    role: lksnyder0.beat,
     beats: [
       "filebeat",
       "metricbeat"
@@ -108,7 +108,7 @@ all:
   hosts: servers
   roles:
   - {
-    role: "ragriz.beat"
+    role: "lksnyder0.beat"
   }
 ```
 

@@ -1,5 +1,5 @@
 ---
-# vars file for ragriz.beat
+# vars file for lksnyder0.beat
 installed_beats: []
 package_and_service_name:
   heartbeat: "heartbeat-elastic"
