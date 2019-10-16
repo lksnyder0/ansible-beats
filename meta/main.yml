@@ -43,8 +43,17 @@ galaxy_info:
       versions:
         - "xenial"
         - "bionic"
-    # - name: CentOS
-    #   versions:
+    - name: Debian
+      version:
+        - "buster"
+    - name: CentOS
+      version:
+        - "7.6"
+    - name: Fedora
+      version:
+        - "30"
+        - "29"
+        - "28"
 
   galaxy_tags: 
     - beat

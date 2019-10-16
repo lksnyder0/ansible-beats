@@ -2,6 +2,8 @@ Beats
 =========
 
 A role to install and manage all supported beats offered from Elastic. This is a generic role that will install any combination of beats agents.
+I have confirmed this role to work with packetbeat, auditbeat, filebeat, and metricbeat on the supported platforms listed
+on the Galaxy page. In concept, this play *should* work for all beats agents but small idiosyncrasies may break it.
 
 Requirements
 ------------
