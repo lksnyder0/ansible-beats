@@ -46,9 +46,9 @@ galaxy_info:
     - name: Debian
       versions:
         - "buster"
-    - name: CentOS
+    - name: EL
       versions:
-        - "7.6"
+        - "7"
     - name: Fedora
       versions:
         - "30"
