@@ -44,13 +44,13 @@ galaxy_info:
         - "xenial"
         - "bionic"
     - name: Debian
-      version:
+      versions:
         - "buster"
     - name: CentOS
-      version:
+      versions:
         - "7.6"
     - name: Fedora
-      version:
+      versions:
         - "30"
         - "29"
         - "28"
