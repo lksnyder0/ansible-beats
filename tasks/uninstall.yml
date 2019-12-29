@@ -2,7 +2,7 @@
 - name: Stop and disable {{ item }}
   become: yes
   systemd:
-    name: "{{ package_and_service_name[beat_name] }}"
+    name: "{{ package_and_service_name[item] }}"
     enabled: false
     state: stopped
 
